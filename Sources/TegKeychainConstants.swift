@@ -22,6 +22,9 @@ public struct KeychainSwiftConstants {
   
   /// Used for specifying a String key when setting/getting a Keychain value.
   public static var attrAccount: String { return toString(kSecAttrAccount) }
+    
+  /// Used for specifying a String comment when setting/getting a Keychain value.
+  public static var attrComment: String { return toString(kSecAttrComment) }
 
   /// Used for specifying synchronization of keychain items between devices.
   public static var attrSynchronizable: String { return toString(kSecAttrSynchronizable) }

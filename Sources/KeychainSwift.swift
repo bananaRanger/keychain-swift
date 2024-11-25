@@ -26,7 +26,7 @@ open class KeychainSwift {
 
   */
   open var accessGroup: String?
-  
+  open var comment: String?
   
   /**
    
@@ -123,6 +123,7 @@ open class KeychainSwift {
     query = addAccessGroupWhenPresent(query)
     query = addUseDataProtectionIfRequired(query)
     query = addSynchronizableIfRequired(query, addingItems: true)
+    query = addCommentIfPresent(query)
     lastQueryParameters = query
     
     lastResultCode = SecItemAdd(query as CFDictionary, nil)
@@ -381,6 +382,14 @@ open class KeychainSwift {
     if !synchronizable { return items }
     var result: [String: Any] = items
     result[KeychainSwiftConstants.attrSynchronizable] = addingItems == true ? true : kSecAttrSynchronizableAny
+    return result
+  }
+    
+  func addCommentIfPresent(_ items: [String: Any]) -> [String: Any] {
+    guard let comment else { return items }
+
+    var result: [String: Any] = items
+    result[KeychainSwiftConstants.attrComment] = comment
     return result
   }
 }
